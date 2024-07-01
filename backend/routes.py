@@ -49,6 +49,11 @@ db.songs.insert_many(songs_list)
 
 
 def parse_json(data):
+    """
+
+    :param data: 
+
+    """
     return json.loads(json_util.dumps(data))
 
 
@@ -61,6 +66,7 @@ def parse_json(data):
 
 @app.route("/health", methods=["GET"])
 def health():
+    """ """
     return jsonify(dict(status="OK")), 200
 
 
@@ -69,7 +75,7 @@ def health():
 
 @app.route("/count", methods=["GET"])
 def count():
-    """Return length of data attached to url"""
+    """ """
     count = db.songs.count_documents({})
 
     return {"count": count}, 200
@@ -91,7 +97,11 @@ def songs():
 
 @app.route("/song/<int:id>", methods=["GET"])
 def get_song_by_id(id):
-    """Find song by ID value"""
+    """Find song by ID value
+
+    :param id: 
+
+    """
     song = db.songs.find_one({"id": id})
     if not song:
         return {"message": f"song with id {id} not found"}, 404
@@ -125,6 +135,11 @@ def create_song():
 
 @app.route("/song/<int:id>", methods=["PUT"])
 def update_song(id):
+    """
+
+    :param id: 
+
+    """
 
     # get data from the json body
     song_in = request.json
@@ -150,6 +165,11 @@ def update_song(id):
 
 @app.route("/song/<int:id>", methods=["DELETE"])
 def delete_song(id):
+    """
+
+    :param id: 
+
+    """
 
     # Extract target ID from URL
     result = db.songs.delete_one({"id": id})
