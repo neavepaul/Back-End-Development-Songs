@@ -45,6 +45,7 @@ db = client.songs
 db.songs.drop()
 db.songs.insert_many(songs_list)
 
+
 def parse_json(data):
     return json.loads(json_util.dumps(data))
 
@@ -53,12 +54,16 @@ def parse_json(data):
 ######################################################################
 
 # Health Endpoint
-@app.route("/health" , methods=["GET"])
+
+
+@app.route("/health", methods=["GET"])
 def health():
     return jsonify(dict(status="OK")), 200
 
-# Count endpoint - 
-@app.route("/count" , methods=["GET"])
+# Count endpoint -
+
+
+@app.route("/count", methods=["GET"])
 def count():
     """Return length of data attached to url"""
     count = db.songs.count_documents({})
@@ -66,6 +71,8 @@ def count():
     return {"count": count}, 200
 
 # Song endpoint
+
+
 @app.route("/song", methods=["GET"])
 def songs():
     """Search for songs by name"""
@@ -74,6 +81,8 @@ def songs():
     return {"songs": parse_json(songResults)}, 200
 
 # Song ID
+
+
 @app.route("/song/<int:id>", methods=["GET"])
 def get_song_by_id(id):
     """Find song by ID value"""
@@ -82,8 +91,9 @@ def get_song_by_id(id):
         return {"message": f"song with id {id} not found"}, 404
 
     return parse_json(song), 200
-    
+
 # Insert Song from Request Body
+
 
 @app.route("/song", methods=["POST"])
 def create_song():
@@ -103,6 +113,8 @@ def create_song():
     return {"insert id": parse_json(insert_id.inserted_id)}, 201
 
 # Update song by ID
+
+
 @app.route("/song/<int:id>", methods=["PUT"])
 def update_song(id):
 
@@ -124,12 +136,13 @@ def update_song(id):
     else:
         return parse_json(db.songs.find_one({"id": id})), 201
 
-## Delete function
+# Delete function
 
-@app.route("/song/<int:id>" , methods=["DELETE"])
+
+@app.route("/song/<int:id>", methods=["DELETE"])
 def delete_song(id):
-    
-    #Extract target ID from URL
+
+    # Extract target ID from URL
     result = db.songs.delete_one({"id": id})
     if result.deleted_count == 0:
         return {"Message": "Song not found"}, 404
