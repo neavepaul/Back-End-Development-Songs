@@ -55,7 +55,7 @@ db.songs.insert_many(songs_list)
 def parse_json(data):
     """
 
-    :param data: 
+    :param data:
 
     """
     return json.loads(json_util.dumps(data))
@@ -103,7 +103,7 @@ def songs():
 def get_song_by_id(id):
     """Find song by ID value
 
-    :param id: 
+    :param id:
 
     """
     song = db.songs.find_one({"id": id})
@@ -141,7 +141,7 @@ def create_song():
 def update_song(id):
     """
 
-    :param id: 
+    :param id:
 
     """
 
@@ -171,7 +171,7 @@ def update_song(id):
 def delete_song(id):
     """
 
-    :param id: 
+    :param id:
 
     """
 
