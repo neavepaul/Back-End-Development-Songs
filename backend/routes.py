@@ -1,14 +1,16 @@
-from . import app
-import os
 import json
+import os
+import sys
+
 import pymongo
-from flask import jsonify, request, make_response, abort, url_for  # noqa; F401
-from pymongo import MongoClient
 from bson import json_util
+from bson.objectid import ObjectId
+from flask import abort, jsonify, make_response, request, url_for  # noqa; F401
+from pymongo import MongoClient
 from pymongo.errors import OperationFailure
 from pymongo.results import InsertOneResult
-from bson.objectid import ObjectId
-import sys
+
+from . import app
 
 SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
 json_url = os.path.join(SITE_ROOT, "data", "songs.json")
