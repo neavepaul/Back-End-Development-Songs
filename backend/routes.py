@@ -39,7 +39,6 @@ if mongodb_username and mongodb_password:
 else:
     url = f"mongodb://{mongodb_service}"
 
-
 print(f"connecting to url: {url}")
 
 try:
@@ -122,12 +121,13 @@ def create_song():
     song_in = request.json
 
     print(song_in["id"])
-
     """if a song with that id already exists, return 303 with URL for the resource"""
     song = db.songs.find_one({"id": song_in["id"]})
 
     if song:
-        return {"Message": f"song with id {song_in['id']} already present"}, 302
+        return {
+            "Message": f"song with id {song_in['id']} already present"
+        }, 302
 
     insert_id: InsertOneResult = db.songs.insert_one(song_in)
 
