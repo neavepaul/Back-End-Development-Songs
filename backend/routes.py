@@ -5,7 +5,11 @@ import sys
 import pymongo
 from bson import json_util
 from bson.objectid import ObjectId
-from flask import abort, jsonify, make_response, request, url_for  # noqa; F401
+from flask import abort
+from flask import jsonify
+from flask import make_response
+from flask import request
+from flask import url_for
 from pymongo import MongoClient
 from pymongo.errors import OperationFailure
 from pymongo.results import InsertOneResult
